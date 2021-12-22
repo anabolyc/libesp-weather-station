@@ -27,6 +27,10 @@
 #include <JsonListener.h>
 #include <JsonStreamingParser.h>
 
+#ifdef ESP32
+typedef signed short        sint16_t;
+#endif
+
 typedef struct AerisObservationsData {
     uint64_t timestamp;
     String dateTimeISO;
@@ -85,6 +89,7 @@ class AerisObservations: public JsonListener {
   private:
     const String host = "api.aerisapi.com";
     const uint8_t port = 80;
+    const int32_t timeout = 10000;
     boolean isMetric = true;
     String currentKey;
     String currentParent;

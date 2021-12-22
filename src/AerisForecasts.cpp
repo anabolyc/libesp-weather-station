@@ -45,7 +45,13 @@ void AerisForecasts::doUpdate(AerisForecastData *forecasts, String path, uint8_t
   Serial.printf("[HTTP] Requesting resource at http://%s:%u%s\n", host.c_str(), port, path.c_str());
 
   WiFiClient client;
-  if(client.connect(host, port)) {
+  #ifdef ESP8266
+  if(client.connect(host, port)) 
+  #endif
+  #ifdef ESP32
+  if(client.connect(host.c_str(), port, timeout)) 
+  #endif
+  {
     bool isBody = false;
     char c;
     Serial.println("[HTTP] connected, now GETting data");

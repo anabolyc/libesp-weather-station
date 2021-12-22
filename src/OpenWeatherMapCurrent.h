@@ -73,6 +73,7 @@ class OpenWeatherMapCurrent: public JsonListener {
   private:
     const String host = "api.openweathermap.org";
     const uint8_t port = 80;
+    const int32_t timeout = 10000;
     String currentKey;
     String currentParent;
     OpenWeatherMapCurrentData *data;
